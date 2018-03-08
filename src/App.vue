@@ -1,28 +1,50 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+  <div >
+    <p>click {{count}} times, count is {{evenorodd}}</p>
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+    <button @click="incrementIfOdd">increment if odd</button>
+    <button @click="incrementAsync">increment async</button>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data () {
+    return {
+      count: 0
+    }
+  },
+  methods: {
+    increment () {
+      const count = this.count
+      this.count = count + 1
+    },
+    decrement () {
+      const count = this.count
+      this.count = count - 1
+    },
+    incrementIfOdd () {
+      const count = this.count
+      if (count % 2 === 1) {
+        this.count = count + 1
+      }
+    },
+    incrementAsync () {
+      setTimeout(() => {
+        const count = this.count
+        this.count = count + 1
+      }, 1000)
+    }
+  },
+  computed: {
+    evenorodd () {
+      return this.count % 2 === 0 ? '偶数' : '奇数'
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
